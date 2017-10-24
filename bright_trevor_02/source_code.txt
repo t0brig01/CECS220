@@ -1,0 +1,255 @@
+PROBLEM_01:
+
+package Assignment_02;
+
+import java.util.Scanner;
+
+public class problem_01 {
+
+	public static void main(String[] args) {
+		
+		Scanner scan = new Scanner(System.in);
+		
+		String first,last,user = "";
+		int n = (int) (Math.random()*90+10);
+		
+		System.out.print("Enter your first name: ");
+		first = scan.nextLine();
+		System.out.print("Enter your last name: ");
+		last = scan.nextLine();
+		user = first.substring(0,1) + last.substring(0,5) + n;
+		System.out.print("Your username is " + user);
+		
+		scan.close();
+	}
+
+}
+
+
+PROBLEM_02:
+
+package Assignment_02;
+
+import java.text.DecimalFormat;
+import java.util.Scanner;
+
+public class problem_02 {
+
+	public static void main(String[] args) {
+		
+		Scanner scan = new Scanner(System.in);
+		DecimalFormat format = new DecimalFormat("#.####");
+		
+		double r,v,sa;
+		
+		System.out.print("Enter radius: ");
+		r = scan.nextFloat();
+		v = ((4/3)*(Math.PI)*(r*r*r));
+		sa = (4*(Math.PI)*(r*r));
+		
+		System.out.println("Volume: " +  format.format(v) );
+		System.out.println("Surface Area:" + format.format(sa) );
+		scan.close();
+	}
+
+}
+
+
+PROBLEM_03:
+
+package Assignment_02;
+
+import java.text.DecimalFormat;
+import java.util.Scanner;
+
+public class problem_03 {
+
+	public static void main(String[] args) {
+		
+		Scanner scan = new Scanner(System.in);
+		DecimalFormat format = new DecimalFormat("#.###");
+		
+		double a,b,c,s,area;
+		
+		System.out.print("Enter side 1 of triangle: ");
+		a = scan.nextDouble();
+		
+		System.out.print("Enter side 2 of triangle: ");
+		b = scan.nextDouble();
+		
+		System.out.print("Enter side 3 of triangle: ");
+		c = scan.nextDouble();
+		
+		s = (a+b+c)/2;
+		
+		area = Math.pow((s*(s-a)*(s-b)*(s-c)), .5);
+		
+		System.out.println("Area:" + format.format(area));
+		
+		scan.close();
+	}
+
+}
+
+
+PROBLEM_04:
+	
+package Assignment_02.problem_04;
+
+public class Flight {
+	
+	private String name;
+	private String flightNumber;
+	private String origin;
+	private String destination;
+	
+	public Flight (String name,String flightNumber,String origin,String destination){
+		this.name = name;
+		this.flightNumber = flightNumber;
+		this.origin = origin;
+		this.destination = destination;
+	}
+	public String getName()
+	{
+		return name;
+	}
+	public void setName(String name)
+	{
+		this.name = name;
+	}
+	public String getFlightNumber()
+	{
+		return flightNumber;
+	}
+	public void setFlightNumber(String flightNumber)
+	{
+		this.flightNumber = flightNumber;
+	}
+	public String getOrigin()
+	{
+		return origin;
+	}
+	public void setOrigin(String origin)
+	{
+		this.origin = origin;
+	}
+	public String getDestination()
+	{
+		return destination;
+	}
+	public void setDestination(String destination)
+	{
+		this.destination = destination;
+	}
+	public String toString()
+	{
+		 return "Flight: Name = " + name + ", Flight Number = " + flightNumber + ", Origin = " + origin + ", Destination = " + destination;
+	}
+}
+
+package Assignment_02.problem_04;
+
+public class FlightTest {
+
+	public static void main(String[] args) {
+		Flight flight1 = new Flight("United","23453","Louisville","Los Angeles");
+		Flight flight2 = new Flight("Southwest","6789","Chicago","New York");
+		System.out.println("Original flights:");
+		System.out.println(flight1.toString());
+		System.out.println(flight2.toString());
+		flight1.setName("Delta");
+		flight2.setOrigin("Lexington");
+		System.out.println("Updated flights:");
+		System.out.println(flight1.toString());
+		System.out.println(flight2.toString());
+	}
+
+}
+
+
+PROBLEM_05:
+
+package Assignment_02.problem_05;
+
+public class Star {
+
+	private int width;
+	private int x;
+	private int y;
+	
+	public Star(int width,int x, int y)
+	{
+		this.width = width;
+		this.x = x;
+		this.y = y;
+	}
+	public int getWidth()
+	{
+		return width;
+	}
+	public void setWidth(int width)
+	{
+		this.width = width;
+	}
+	public int getX()
+	{
+		return x;
+	}
+	public void setX(int x)
+	{
+		this.x = x;
+	}
+	public int getY()
+	{
+		return y;
+	}
+	public void setY(int y)
+	{
+		this.y = y;
+	}
+
+}
+
+package Assignment_02.problem_05;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import javax.swing.JApplet;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class DrawStar extends JApplet {
+
+	private static final long serialVersionUID = 1L;
+
+	public void paint (Graphics page)
+	{
+		this.setSize(1500,600);
+		page.setColor(Color.blue);
+		page.fillRect(0, 0, 1500, 600);
+		page.setColor(Color.green);
+		page.fillRect(0, 500, 1500, 150);
+		Star star1 = new Star(60, 40, 25);
+		Star star2 = new Star(100, 200, 40);
+		Star star3 = new Star(175, 600, 50);
+		Star star4 = new Star(40, 350, 75);
+		Star star5 = new Star(110, 1200, 100);
+		Star star6 = new Star(150, 1400, 10);
+		Star star7 = new Star(70, 800, 50);
+		Star star8 = new Star(90, 1000, 50);
+		ArrayList<Star> starsArray = new ArrayList<Star>(Arrays.asList(star1,star2,star3,star4,star5,star6,star7,star8));
+		page.setColor(Color.yellow);
+		for (Star stars: starsArray){
+			int w = stars.getWidth();
+			int x = stars.getX();
+			int y = stars.getY();
+			int x1[] = {x, x+w/5, x+w/2, x+w/4, x+w*3/10, x, x-w*3/10, x-w/4, x-w/2, x-w/5, x}; 
+			int y1[] = {y, y+w*2/5, y+w*2/5, y+w*3/5, y+w, y+w*4/5, y+w, y+w*3/5, y+w*2/5, y+w*2/5, y};
+			int n1 = 10;
+			page.fillPolygon(x1, y1, n1);
+		}
+
+	}
+}
+
+

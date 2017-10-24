@@ -1,0 +1,435 @@
+Problem 1:
+package Assignment_03;
+
+import java.text.NumberFormat;
+
+public class Account
+{
+	   private final double RATE = 0.035;  // interest rate of 3.5%
+
+	   private long acctNumber;
+	   private double balance;
+	   private String name;
+
+	   //-----------------------------------------------------------------
+	   //  Sets up the account by defining its owner, account number, and initial balance.
+	   //-----------------------------------------------------------------
+	   public Account (String owner, long account, double initial)
+	   {
+	      name = owner;
+	      acctNumber = account;
+	      balance = initial;
+	   }
+	   //-----------------------------------------------------------------
+	   //  Deposits the specified amount into the account. Returns the new balance.
+	   //-----------------------------------------------------------------
+	   public double deposit (double amount)
+	   {
+		   if (amount < 0)
+		   {
+			   System.out.println("Error: Deposit amount cannot be negative.");
+		   }
+		   else
+		   {
+			   balance = balance + amount;
+		   }
+		   return balance;
+	   }
+	   //-----------------------------------------------------------------
+	   //  Withdraws the specified amount from the account and applies the fee. Returns the new balance.
+	   //-----------------------------------------------------------------
+	   public double withdraw (double amount, double fee)
+	   {
+		  double tW = amount+fee;
+		  if (tW > balance)
+		  {
+			  System.out.println("Error: Withdrawl amount with fees cannot exceed funds");
+		  }
+		  else
+		  {
+			  balance = balance - amount - fee;
+		  }
+	      return balance;
+	   }
+	   //-----------------------------------------------------------------
+	   //  Adds interest to the account and returns the new balance.
+	   //-----------------------------------------------------------------
+	   public double addInterest ()
+	   {
+	      balance += (balance * RATE);
+	      return balance;
+	   }
+	   //-----------------------------------------------------------------
+	   //  Returns the current balance of the account.
+	   //-----------------------------------------------------------------
+	   public double getBalance ()
+	   {
+	      return balance;
+	   }
+	   //-----------------------------------------------------------------
+	   //  Returns a one-line description of the account as a string.
+	   //-----------------------------------------------------------------
+	   public String toString ()
+	   {
+	      NumberFormat fmt = NumberFormat.getCurrencyInstance();
+	      return (acctNumber + "\t" + name + "\t" + fmt.format(balance));
+	   }
+}
+
+package Assignment_03;
+
+public class AccountTest {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Account test = new Account ("John Doe",7898,500);
+		System.out.println("John Doe has a balance of $" + test.getBalance());
+		
+		test.withdraw(490, 2);
+		System.out.println("John Doe now has a balance of $" + test.getBalance());
+		System.out.println();
+		
+		test.withdraw(10, 2);
+		System.out.println("John Doe now has a balance of $" + test.getBalance());
+		System.out.println();
+		
+		test.deposit(-300);
+		System.out.println("John Doe now has a balance of $" + test.getBalance());
+		System.out.println();
+		
+		test.deposit(300);
+		System.out.println("John Doe now has a balance of $" + test.getBalance());
+
+	}
+
+}
+
+
+Problem 2:
+package Assignment_03;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+import javax.swing.JCheckBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+@SuppressWarnings("serial")
+public class StyleOptionsPanel extends JPanel
+{
+	private JLabel	saying;
+	private JCheckBox	bold, italic;
+	private JTextField font;
+
+	public StyleOptionsPanel()
+	{
+		saying = new JLabel("Say it with style!");
+		saying.setFont(new Font("Helvetica", Font.PLAIN, 36));
+		
+		font = new JTextField("36");
+		font.setBackground(Color.lightGray);
+
+		bold = new JCheckBox("Bold");
+		bold.setBackground(Color.cyan);
+		italic = new JCheckBox("Italic");
+		italic.setBackground(Color.cyan);
+
+		StyleListener listener = new StyleListener();
+		bold.addItemListener(listener);
+		italic.addItemListener(listener);
+
+		KeyListener keyListener = new KeyListener()
+		{
+			public void keyPressed(KeyEvent kp) 
+			{
+				if (kp.getKeyCode() == KeyEvent.VK_ENTER)
+				{
+					int style = Font.PLAIN;
+					if (bold.isSelected()) style += Font.BOLD;
+					if (italic.isSelected()) style += Font.ITALIC;
+					saying.setFont(new Font("Helvetica", style, Integer.parseInt(font.getText())));
+				}
+			}
+			public void keyReleased(KeyEvent kp) {}
+			public void keyTyped(KeyEvent kp) {}	
+		};
+		font.addKeyListener(keyListener);
+
+		add(saying);
+		add(bold);
+		add(italic);
+		add(font);
+
+		setBackground(Color.cyan);
+		setPreferredSize(new Dimension(300, 100));
+	}
+
+	private class StyleListener implements ItemListener
+	{
+		public void itemStateChanged(ItemEvent event)
+		{
+			int style = Font.PLAIN;
+
+			if (bold.isSelected())
+				style += Font.BOLD;
+
+			if (italic.isSelected())
+				style += Font.ITALIC;
+
+			saying.setFont(new Font("Helvetica", style, 36));
+		}
+	}
+}
+
+
+package Assignment_03;
+
+import javax.swing.JFrame;
+
+public class StyleOptionsPanelApp
+{
+
+	public static void main(String[] args)
+	{
+		JFrame frame = new JFrame("Style Options");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		StyleOptionsPanel panel = new StyleOptionsPanel();
+		frame.getContentPane().add(panel);
+
+		frame.pack();
+		frame.setVisible(true);
+	}
+}
+
+
+Problem 3:
+package Assignment_03;
+
+import java.util.Scanner;
+
+public class problem_03 {
+		
+	public static void main(String[] args)
+	{
+		Scanner scan = new Scanner(System.in);
+		String input;
+		int a = 0, e = 0, i = 0, o = 0, u = 0, z = 0, nonvowel = 0;
+		System.out.println("Enter string:");
+		input = scan.nextLine();
+		for (z = 0; z < input.length(); z++)
+		{
+			String tp = input.substring(z,z+1);
+			if (tp.equals("a"))
+			{
+				a++;
+			}
+			else if (tp.equals("e"))
+			{
+				e++;
+			}
+			else if (tp.equals("o"))
+			{
+				o++;
+			}
+			else if (tp.equals("u"))
+			{
+				u++;
+			}
+			else nonvowel++;
+		}
+			
+		System.out.println("Number of a's : " + a);
+		System.out.println("Number of e's : " + e);
+		System.out.println("Number of i's : " + i);
+		System.out.println("Number of o's : " + o);
+		System.out.println("Number of u's : " + u);
+		System.out.println("Number of non vowels : " + nonvowel);
+		scan.close();
+		
+	}
+	
+
+}
+
+
+Problem 4:
+package Assignment_03;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import javax.swing.JApplet;
+
+public class problem_04 extends JApplet{
+
+	private static final long serialVersionUID = 1L;
+
+	public void paint(Graphics page)
+	{
+		this.setSize(1300,300);
+		page.setColor(Color.green);
+		page.fillRect(0, 0, 1400, 300);
+		page.setColor(Color.black);
+		for(int i = 0; i < 20; i++){
+			int rand = (int)(Math.random()*1300+10);
+			page.fillRect(0, i*15, rand, 5);
+		}
+	}
+
+}
+
+
+Problem 5:
+package Assignment_03;
+
+import java.util.ArrayList;
+
+public class Course {
+	
+	private String name;
+	private ArrayList<Student> students;
+	
+	public Course(String name){
+		this.setName(name);
+		this.students = new ArrayList<Student>();
+	}
+	public String getName()
+	{
+		return name;
+	}
+	public void setName(String name)
+	{
+		this.name = name;
+	}
+	public void addStudent(Student student)
+	{
+		students.add(student);
+	}
+	public double average()
+	{
+		double average = 0;
+		int i = 0;
+		for (Student student:students)
+		{
+			average += student.getAverageTestScore();
+			i++;
+		}
+		average = average/i;
+		return average;
+	}
+	public void roll(){
+		System.out.println("Roll for " + this.getName() + ":");
+		for (Student student: students){
+			System.out.println(student.toString());
+			System.out.println();
+		}
+	}
+
+}
+
+package Assignment_03;
+
+public class Address
+{
+	private String	streetAddress, city, state;
+	private long	zipCode;
+
+	public Address(String street, String town, String st, long zip)
+	{
+		streetAddress = street;
+		city = town;
+		state = st;
+		zipCode = zip;
+	}
+
+	public String toString()
+	{
+		String result;
+
+		result = streetAddress + "\n";
+		result += city + ", " + state + "  " + zipCode;
+
+		return result;
+	}
+}
+
+package Assignment_03;
+
+public class CourseTest {
+	
+	public static void main(String[] args){
+		Course course = new Course("CECS 220");
+		course.addStudent(new Student("John","Doe",new Address("1323 3rd Street", "Louisville", "KY", 40332),new Address("3453 Shelbyville Rd","Louisville","KY",40222), 92.5));
+		course.addStudent(new Student("Jim","Lindell",new Address("2108 S 4th Street", "Louisville", "KY", 40352),new Address("3453 Main St","Chicago","IL",45672), 80.5));
+		course.addStudent(new Student("Bob","Stone",new Address("455 Whipsmill", "Louisville", "KY", 40222),new Address("678 Bardstown Rd","Louisville","KY",40322), 75.9));
+		course.roll();
+		System.out.println("Average Test Scores: " + course.average() + "%");
+	}
+
+}
+
+
+Problem 6:
+package Assignment_03;
+
+public interface Priority {
+	public void setPriority(int priority);
+	public int getPriority();
+}
+
+package Assignment_03;
+
+public class Task implements Priority {
+	private int priority;
+	private String name;
+	public Object getPriority;
+	
+	public Task(int priority, String name)
+	{
+		this.priority = priority;
+		this.name = name;
+	}
+	public int getPriority() 
+	{
+		return priority;
+	}
+	public void setPriority(int priority)
+	{
+		this.priority = priority;
+	}
+	public String getName()
+	{
+		return name;
+	}
+	public void setName(String name)
+	{
+		this.name = name;
+	}
+}
+
+package Assignment_03;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class TaskTest {
+
+	public static void main(String[] args) {
+		ArrayList<Task> tasks = new ArrayList<Task>(Arrays.asList(new Task(1,"Do CECS homework"),new Task(4,"Laundry"),new Task(2,"Eat"),new Task(3,"Go Shopping")));
+		System.out.println("Tasks List:");
+		for (Task task: tasks)
+		{
+			System.out.println(task.getName() + ". Priority = " + task.getPriority());
+		}
+		System.out.println();
+	}
+
+}
+

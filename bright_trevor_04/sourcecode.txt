@@ -1,0 +1,392 @@
+******************************************************PROBLEM 01**************************************************************
+package problem_01;
+
+import java.util.Scanner;
+
+public class problem_01 {
+
+	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+		int [] array = new int[51];
+		int input = 0;
+		
+		while (true)
+		{
+			System.out.println("Enter number between 0 and 50. To quit, enter number outside limits.");
+			input = scan.nextInt();
+			if (input <= 50 && input >=0)
+			{
+				array[input]++;
+			}
+			else
+			{
+				break;
+			}
+		}
+		System.out.println("");
+		for (int i = 0; i < array.length; i++)
+		{
+			if (array[i] > 0)
+			{
+				System.out.println(i + ": " + array[i] + " time(s)");
+			}
+		}
+		scan.close();
+	}
+
+}
+
+********************************************************PROBLEM 02********************************************************
+package problem_02;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+
+import javax.swing.JPanel;
+
+public class car extends JPanel{
+	private static final long serialVersionUID = 1L;
+
+	private int x,y;
+	private int[] x1,x2,x3,x4,x5;
+	private int[] y1,y2,y3,y4,y5;
+	
+	public car(int x, int y)
+	{
+		this.x = x;
+		this.y = y;
+		this.setPreferredSize(new Dimension(800, 800));
+		this.setBackground(Color.LIGHT_GRAY);
+	}
+	
+	public void paintComponent(Graphics page)
+	{
+		super.paintComponent(page);
+		this.initial();
+		page.setColor(Color.RED);
+		page.fillPolygon(x1, y1, x1.length);
+		page.fillPolygon(x2, y2, x2.length);
+		page.setColor(Color.GRAY);		
+		page.drawPolyline(x3, y3, x3.length);
+		page.drawPolyline(x4, y4, x4.length);
+		page.drawPolyline(x5, y5, x5.length);
+		page.setColor(Color.black);
+		page.fillOval(x + 120, y + 170, 75 , 75);
+		page.fillOval(x + 310, y + 170, 75, 75);
+		
+	}
+	
+	public void initial()
+	{
+		x1 = new int[]{x + 450, x + 400, x + 50, x + 50, x + 450};
+		y1 = new int[]{y + 150, y + 100, y + 100, y + 200, y + 200};
+		x2 = new int[]{x + 350, x + 300, x + 150, x + 100, x + 250, x + 250, x + 250};
+		y2 = new int[]{y + 100, y+50, y, y + 100, y + 100, y, y + 100};
+		x3 = new int[]{x + 40, x};
+		y3 = new int[]{y + 180, y + 180};
+		x4 = new int[]{x + 40, x};
+		y4 = new int[]{y + 170, y + 170};
+		x5 = new int[]{x + 40, x};
+		y5 = new int[]{y + 160, y + 160};
+	}
+
+}
+
+
+package problem_02;
+
+import javax.swing.JFrame;
+
+public class carDriver {
+
+	public static void main(String[] args) {
+		JFrame frame = new JFrame("Car");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		car panel = new car(150, 300);
+		frame.getContentPane().add(panel);
+		frame.pack();
+		frame.setVisible(true);
+	}
+
+}
+
+*********************************************************PROBLEM 03******************************************************
+package problem_03;
+
+public class HospitalEmployee {
+	private String firstName;
+	private String lastName;
+	private int salary;
+	private int age;
+	private int id;
+	
+	public HospitalEmployee(String firstName, String lastName, int salary, int age, int id)
+	{
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.salary = salary;
+		this.age = age;
+		this.id = id;
+	}
+	public String getLabel()
+	{
+		return "[" + this.getClass().getSimpleName() + "] " + this.getFirstName() + " " + this.getLastName() + ": ";
+	}
+	public int getAge()
+	{
+		return age;
+	}
+	public void setAge(int age)
+	{
+		this.age = age;
+	}
+	public int getSalary()
+	{
+		return salary;
+	}
+	public void setSalary(int salary)
+	{
+		this.salary = salary;
+	}
+	public String getFirstName()
+	{
+		return firstName;
+	}
+	public void setFirstName(String firstName)
+	{
+		this.firstName = firstName;
+	}
+	public String getLastName()
+	{
+		return lastName;
+	}
+	public void setLastName(String lastName)
+	{
+		this.lastName = lastName;
+	}
+	public int getId()
+	{
+		return id;
+	}
+	public void setId(int id)
+	{
+		this.id = id;
+	}
+}
+
+package problem_03;
+
+public class Administrator extends HospitalEmployee {
+
+	public Administrator(String firstName, String lastName, int salary, int age, int id) {
+		super(firstName, lastName, salary, age, id);
+	}
+	public void countMoney()
+	{
+		System.out.println(this.getLabel()+ "$956,987 was counted today.");
+	}
+	public void updateRecords()
+	{
+		System.out.println(this.getLabel()+"The records were updated");
+	}
+
+}
+
+package problem_03;
+
+public class Doctor extends HospitalEmployee {
+
+	public Doctor(String firstName, String lastName, int salary, int age, int id) {
+		super(firstName, lastName, salary, age, id);
+	}
+	public void giveShots()
+	{
+		System.out.println(this.getLabel()+ "The patient was given the shots.");
+	}
+	public void prescribeMeds()
+	{
+		System.out.println(this.getLabel()+"The patient was prescribed recommended medication");
+	}
+	
+}
+
+package problem_03;
+
+public class Janitor extends HospitalEmployee{
+
+	public Janitor(String firstName, String lastName, int salary, int age, int id) {
+		super(firstName, lastName, salary, age, id);
+	}
+	public void mopFloors()
+	{
+		System.out.println(this.getLabel()+"The floors were mopped.");
+	}
+	public void cleanBathroom()
+	{
+		System.out.println(this.getLabel()+"The bathrooms were cleaned.");
+	}
+
+}
+
+package problem_03;
+
+public class Nurse extends HospitalEmployee{
+
+	public Nurse(String firstName, String lastName, int salary, int age, int id) {
+		super(firstName, lastName, salary, age, id);
+	}
+	public void takeBP()
+	{
+		System.out.println(this.getLabel()+"The patient's blood pressure was taken and is 120/80.");
+	}
+	public void takeTemp()
+	{
+		System.out.println(this.getLabel()+"The patient's temperature was taken and is 98.6");
+	}
+
+}
+
+package problem_03;
+
+public class Receptionist extends HospitalEmployee {
+
+	public Receptionist(String firstName, String lastName, int salary, int age, int id) {
+		super(firstName, lastName, salary, age, id);
+	}
+	public void scheduleApp()
+	{
+		System.out.println(this.getLabel()+"The receptionist scheduled patient's appointments.");
+	}
+}
+
+package problem_03;
+
+public class Surgeon extends HospitalEmployee {
+
+	public Surgeon(String firstName, String lastName, int salary, int age, int id) {
+		super(firstName, lastName, salary, age, id);
+	}
+	public void doSurgery()
+	{
+		System.out.println(this.getLabel()+"The patient had a surgery.");
+	}
+
+}
+
+package problem_03;
+
+public class Driver {
+
+	public static void main(String[] args) {
+		Doctor doctor = new Doctor ("John","Smith",120000,45,987);
+		Nurse nurse = new Nurse("Jane","Doe",100000,30,345);
+		Administrator admin = new Administrator("Rob","Stone",80000,36,453);
+		Surgeon surgeon = new Surgeon ("Michael","Brown",150000,34,242);
+		Receptionist recep = new Receptionist("Chris","Jackson",60000,25,122);
+		Janitor janitor = new Janitor("Harold","Bowman",70000,56,324);
+		doctor.giveShots();
+		doctor.prescribeMeds();
+		nurse.takeBP();
+		nurse.takeTemp();
+		admin.countMoney();
+		admin.updateRecords();
+		surgeon.doSurgery();
+		recep.scheduleApp();
+		janitor.cleanBathroom();
+		janitor.mopFloors();
+	}
+
+}
+
+***********************************************************PROBLEM 04****************************************************************
+package problem_02;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+
+import javax.swing.JPanel;
+
+public class car extends JPanel{
+	private static final long serialVersionUID = 1L;
+
+	private int x,y;
+	private int[] x1,x2,x3,x4,x5;
+	private int[] y1,y2,y3,y4,y5;
+	
+	public car(int x, int y)
+	{
+		this.x = x;
+		this.y = y;
+		this.setPreferredSize(new Dimension(800, 800));
+		this.setBackground(Color.LIGHT_GRAY);
+	}
+	
+	public void paintComponent(Graphics page)
+	{
+		super.paintComponent(page);
+		this.initial();
+		page.setColor(Color.RED);
+		page.fillPolygon(x1, y1, x1.length);
+		page.fillPolygon(x2, y2, x2.length);
+		page.setColor(Color.GRAY);		
+		page.drawPolyline(x3, y3, x3.length);
+		page.drawPolyline(x4, y4, x4.length);
+		page.drawPolyline(x5, y5, x5.length);
+		page.setColor(Color.black);
+		page.fillOval(x + 120, y + 170, 75 , 75);
+		page.fillOval(x + 310, y + 170, 75, 75);
+		
+	}
+	
+	public void initial()
+	{
+		x1 = new int[]{x + 450, x + 400, x + 50, x + 50, x + 450};
+		y1 = new int[]{y + 150, y + 100, y + 100, y + 200, y + 200};
+		x2 = new int[]{x + 350, x + 300, x + 150, x + 100, x + 250, x + 250, x + 250};
+		y2 = new int[]{y + 100, y+50, y, y + 100, y + 100, y, y + 100};
+		x3 = new int[]{x + 40, x};
+		y3 = new int[]{y + 180, y + 180};
+		x4 = new int[]{x + 40, x};
+		y4 = new int[]{y + 170, y + 170};
+		x5 = new int[]{x + 40, x};
+		y5 = new int[]{y + 160, y + 160};
+	}
+
+}
+
+package problem_02;
+
+import javax.swing.JFrame;
+
+public class carMove {
+
+	public static void main(String[] args) {
+		JFrame frame = new JFrame("Car moving");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		for (int i = -650; i < 850; i+=10){
+			if (i == 800)
+			{
+				i =-650;
+			}
+			else
+			{
+			car panel = new car(i, 300);
+			frame.getContentPane().add(panel);
+			frame.pack();
+			frame.setVisible(true);
+			}
+			try 
+			{
+				Thread.sleep(10);
+			} 
+			catch (InterruptedException e) 
+			{
+				break;
+			}
+		}
+	}
+
+}
+

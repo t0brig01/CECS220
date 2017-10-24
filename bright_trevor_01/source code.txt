@@ -1,0 +1,139 @@
+Source Code
+Problem 1:
+package Assignment_01;
+
+public class problem_01 {
+
+	public static void main(String[] args) {
+		System.out.println("TTTTTTTTTTTTTTTTT   AAAAAAAA   BBBBBBB");
+		System.out.println("      TTTT         AAAAAAAAAA  BB    BB");
+		System.out.println("      TTTT         AAA    AAA  BB    BB");
+		System.out.println("      TTTT         AAA    AAA  BBBBBB");
+		System.out.println("      TTTT         AAAAAAAAAA  BB    BB");
+		System.out.println("      TTTT         AAA    AAA  BB    BB");
+		System.out.println("      TTTT         AAA    AAA  BBBBBB");
+	}
+
+}
+
+
+Problem 2:
+package Assignment_01;
+
+
+import java.awt.Graphics;
+import javax.swing.JApplet;
+
+public class J_Einstein extends JApplet
+{
+	private static final long	serialVersionUID	= 1L;
+	
+
+	// -----------------------------------------------------------------
+	// Draws a quotation by Albert Einstein among some shapes.
+	// -----------------------------------------------------------------
+	public void paint(Graphics page)
+	{
+		super.paint(page);
+		page.drawRect(50, 50, 40, 40); // square
+		page.drawRect(60, 80, 225, 30); // rectangle
+		page.drawOval(275,100, 20, 20); // circle
+		page.drawLine(35, 60, 100, 120); // line
+
+		page.drawString("Out of clutter, find simplicity.", 110, 70);
+		page.drawString("-- Albert Einstein", 130, 100);
+	}
+}
+
+
+Problem 3:
+
+package Assignment_01;
+
+import java.util.Scanner;
+
+public class problem_03 {
+	
+	public static void main(String[] args) {
+		int h,m,s,t=0;
+		
+		Scanner scan = new Scanner(System.in);
+		
+		System.out.print("Enter number of hours: ");
+		h = scan.nextInt();
+		
+		System.out.print("Enter number of minutes: ");
+		m = scan.nextInt();
+		
+		System.out.print("Enter number of seconds: ");
+		s = scan.nextInt();
+		
+		t = (h*3600)+(m*60)+s;
+		
+		System.out.print("Total time in seconds: " + t);
+		scan.close();
+	}
+	
+
+}
+
+Problem 4:
+
+package Assignment_01;
+
+import java.util.Scanner;
+
+public class problem_04 {
+
+	public static void main(String[] args) {
+		int s,p,a = 0;
+		
+		Scanner scan = new Scanner(System.in);
+		
+		System.out.print("Enter side of square: ");
+		s = scan.nextInt();
+		
+		p = 4*s;
+		a = s*s;
+		
+		System.out.println("You entered " + s + " as the side of square.");
+		System.out.print("The perimeter of the square is " + p + " and the area is " + a + ".");
+		
+		scan.close();
+
+	}
+
+}
+
+Problem 5:
+package Assignment_01;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import javax.swing.JApplet;
+
+public class problem_05 extends JApplet
+{
+	
+	private static final long	serialVersionUID	= 1L;
+
+	public void paint(Graphics page)
+	{
+		super.paint(page);
+		page.setColor(Color.red);
+		page.drawOval(35,35, 20, 30); // circle
+		page.drawLine(45, 65, 45, 115); // line
+		
+		page.setColor(Color.green);
+		page.drawOval(65,35, 20, 30); // circle
+		page.drawLine(75, 65, 75, 115); // line
+		
+		page.setColor(Color.blue);
+		page.drawOval(95,35, 20, 30); // circle
+		page.drawLine(105, 65, 105, 115); // line
+	}
+	
+
+}
+
+

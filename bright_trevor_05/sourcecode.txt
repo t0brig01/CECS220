@@ -1,0 +1,219 @@
+*****************************************Problem 01***************************************************
+package problem_01;
+
+public interface Speaker {
+	public void speak();
+	public void  speakWL(String string);
+}
+******************************************************************************************************
+package problem_01;
+
+public class Senator implements Speaker{
+	public void speak()
+	{
+		System.out.println("I am the Senator");
+	}
+	public void speakWL(String string)
+	{
+		System.out.println("[Senator]: "+ string);
+	}
+
+}
+******************************************************************************************************
+package problem_01;
+
+public class Attorney implements Speaker{
+	public void speak()
+	{
+		System.out.println("I am the Attorney");
+	}
+	public void speakWL(String string)
+	{
+		System.out.println("[Attorney]: "+ string);
+	}
+}
+******************************************************************************************************
+package problem_01;
+
+public class Preacher implements Speaker{
+	public void speak()
+	{
+		System.out.println("I am the Preacher");
+	}
+	public void speakWL(String string)
+	{
+		System.out.println("[Preacher]: "+ string);
+	}
+}
+******************************************************************************************************
+package problem_01;
+
+public class Driver {
+
+	public static void main(String[] args) {
+		Speaker speaker = new Senator();
+		speaker.speak();
+		speaker.speakWL("Hello Earth.");
+		System.out.println();
+		speaker = new Attorney();
+		speaker.speak();
+		speaker.speakWL("Hello America.");
+		System.out.println();
+		speaker = new Preacher();
+		speaker.speak();
+		speaker.speakWL("Hello Kentucky.");
+
+	}
+
+}
+*****************************************Problem 02***************************************************
+package problem_02;
+public class Sorting
+{
+	// -----------------------------------------------------------------
+	// Sorts the specified array of objects using the selection
+	// sort algorithm.
+	// -----------------------------------------------------------------
+	@SuppressWarnings({ "rawtypes", "unchecked" }) 
+	public static void selectionSort(Comparable[] list)
+	{
+		int min;
+		Comparable temp;
+		for (int index = 0; index < list.length - 1; index++)
+		{
+			min = index;
+			for (int scan = index + 1; scan < list.length; scan++)
+				if (list[scan].compareTo(list[min]) > 0)
+					min = scan;
+			// Swap the values
+			temp = list[min];
+			list[min] = list[index];
+			list[index] = temp;
+		}
+	}
+	// -----------------------------------------------------------------
+	// Sorts the specified array of objects using the insertion
+	// sort algorithm.
+	// -----------------------------------------------------------------
+	@SuppressWarnings({ "rawtypes", "unchecked" }) 
+	public static void insertionSort(Comparable[] list)
+	{
+		for (int index = 1; index < list.length; index++)
+		{
+			Comparable key = list[index];
+			int position = index;
+			// Shift larger values to the right
+			while (position > 0 && key.compareTo(list[position - 1]) > 0)
+			{
+				list[position] = list[position - 1];
+				position--;
+			}
+			list[position] = key;
+		}
+	}
+}
+******************************************************************************************************
+package problem_02;
+
+public class Driver {
+
+	public static void main(String[] args) {
+		Integer[] array = new Integer[]
+				{2,6,3,1,6};
+		Sorting.selectionSort(array);
+		for (int i:array)
+		{
+			System.out.print(i + " ");
+		}
+		System.out.println();
+		array = new Integer[]
+				{2,6,3,1,6};
+		Sorting.selectionSort(array);
+		for (int i:array)
+		{
+			System.out.print(i + " ");
+		}
+	}
+
+}
+
+*****************************************Problem 03***************************************************
+package problem_03;
+
+public class StringTooLongException extends Exception{
+	private static final long serialVersionUID = 1L;
+	public StringTooLongException(String string)
+	{
+		super(string);
+	}
+
+}
+******************************************************************************************************
+package problem_03;
+
+import java.util.Scanner;
+
+public class driver {
+
+	public static void main(String[] args) throws StringTooLongException{
+		StringTooLongException exception = new StringTooLongException("String is 20 characters or longer");
+		Scanner scan = new Scanner(System.in);
+		String input = "";
+		while (!input.equalsIgnoreCase("done"))
+		{
+			System.out.println("Enter string (Enter DONE to quit): ");
+			input = scan.nextLine();
+			if (input.length() >= 20)
+			{
+				scan.close();
+				throw exception;
+			}
+		}
+		scan.close();
+	}
+
+}
+
+*****************************************Problem 04***************************************************
+package problem_04;
+
+public class StringTooLongException extends Exception{
+
+	private static final long serialVersionUID = 1L;
+	
+	public StringTooLongException(String message){
+		super(message);
+	}
+
+}
+******************************************************************************************************
+package problem_04;
+
+import java.util.Scanner;
+
+public class driver {
+
+	public static void main(String[] args) {
+		StringTooLongException exception = new StringTooLongException("String is 20 characters or longer.");
+		Scanner scan = new Scanner(System.in);
+		String input = "";
+		while(!input.equalsIgnoreCase("done"))
+		{
+			System.out.println("Enter string (DONE to quit):");
+			input = scan.nextLine();
+			try
+			{
+				if (input.length() >= 20){
+					throw exception;
+				}
+			}
+			catch(StringTooLongException e)
+			{
+				System.out.println("Error: String is 20 characters or longer. Please try again.");
+			}
+		}
+		scan.close();
+	}
+
+}
+
